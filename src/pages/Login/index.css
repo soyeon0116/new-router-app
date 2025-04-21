@@ -1,0 +1,27 @@
+.modalBack {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.loginModal {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  border: 1px solid gray;
+  border-radius: 10px;
+  width: 300px;
+  padding: 10px;
+}
+.loginModal input {
+  display: block;
+  height: 30px;
+  margin: 10px 0;
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid #aaa;
+}

@@ -1,0 +1,30 @@
+main {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+header {
+  height: 50px;
+  border-bottom: 1px solid gray;
+  padding: 10px;
+  align-content: center;
+}
+header h1 {
+  font-size: 2rem;
+  font-weight: bold;
+  line-height: 100%;
+}
+.contentWrap {
+  width: 100vw;
+  display: flex;
+  flex-grow: 1;
+}
+nav {
+  /* height: calc(100% - 50px); */
+  width: 100px;
+  align-content: center;
+  border-right: 1px solid gray;
+}
+.postWrap {
+  flex-grow: 1;
+}

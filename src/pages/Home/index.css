@@ -1,0 +1,9 @@
+.homeWrap {
+  height: 100%;
+  text-align: center;
+  align-content: center;
+}
+.homeWrap h1 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
