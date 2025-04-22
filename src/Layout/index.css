@@ -20,11 +20,20 @@ header h1 {
   flex-grow: 1;
 }
 nav {
-  /* height: calc(100% - 50px); */
   width: 100px;
   align-content: center;
   border-right: 1px solid gray;
 }
+nav p {
+  padding: 10px;
+  cursor: pointer;
+  text-align: center;
+}
+nav p:hover {
+  color: var(--main-btn-color);
+}
 .postWrap {
   flex-grow: 1;
+  overflow: auto;
+  height: 92vh;
 }

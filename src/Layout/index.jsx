@@ -9,8 +9,12 @@ export default function Layout() {
       </header>
       <div className="contentWrap">
         <nav>
-          <Link to={"/"}>HOME</Link>
-          <p>POSTS</p>
+          <Link to={"/"}>
+            <p>HOME</p>
+          </Link>
+          <Link to={"/posts"}>
+            <p>POSTS</p>
+          </Link>
           <p>BACK</p>
         </nav>
         <div className="postWrap">

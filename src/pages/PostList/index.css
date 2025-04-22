@@ -1,0 +1,26 @@
+.postListWrap ul {
+  padding: 10px;
+}
+ul li {
+  padding: 10px;
+  background-color: #eee;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+ul li :last-of-type {
+  margin-bottom: 0;
+}
+ul li a:hover {
+  color: var(--main-btn-color);
+}
+.modalListDel {
+  width: 300px;
+}
+.modalListDel h3 {
+  font-size: 1.1rem;
+  margin-bottom: 10px;
+  text-align: center;
+}

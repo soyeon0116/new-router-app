@@ -11,7 +11,7 @@ export default function Login({ setShowModal, onLogIn }) {
   };
   return (
     <div className="modalBack">
-      <form className="loginModal" id="logIn" onSubmit={submitFn}>
+      <form className="modalContent loginModal" id="logIn" onSubmit={submitFn}>
         <h2>로그인</h2>
         <input name="ID" type="text" placeholder="ID" />
         <input name="PW" type="password" placeholder="PW" />
