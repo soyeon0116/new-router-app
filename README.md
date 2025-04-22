@@ -1,12 +1,28 @@
-# React + Vite
+# Router 학습
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## HOME
+- Home 선택시, 로그인 페이지로 이동
+- 로그인 ID, PW 는 admin/ admin
+- 로그인 성공시 POST 페이지로 이동
 
-Currently, two official plugins are available:
+## POST
+- POST 리스트를 출력
+- DELETE 버튼 선택시, 해당 리스트 삭제 기능
+- 리스트 선택시, DETAIL 페이지로 이동
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## DETAIL
+- 선택한 리스트의 내용 확인 가능
+- EDIT 버튼 선택시, 내용 변경 가능한 EDIT 페이지로 이동
+- 즐겨찾기선택시 해당 리스트 내용 즐겨찾기 페이지에서 확인 가능
 
-## Expanding the ESLint configuration
+## EDIT
+- 해당 내용 수정 가능
+- 수정시 '저장중' 팝업 생성
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 즐겨찾기
+- 리스트에서 즐겨찾기 한 리스트 목록 확인(?)
+
+## BACK
+- 뒤로가기 기능
+
+<hr/>
