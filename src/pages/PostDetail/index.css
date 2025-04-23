@@ -1,0 +1,11 @@
+.detailWrap h2 {
+  font-weight: bold;
+}
+.detailWrap h3 {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+.detailWrap p {
+  width: 50%;
+  margin-bottom: 10px;
+}

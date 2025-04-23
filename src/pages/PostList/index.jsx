@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { delPost, getAllPosts } from "../../apis/post";
 import "./index.css";
 import { Link } from "react-router-dom";
@@ -10,6 +10,7 @@ export default function PostList() {
   const [isDeleting, setIsDeleting] = useState(false);
   const [curPage, setCurPage] = useState(1);
   const postsPerPage = 15;
+  const loaderRef = useRef();
 
   useEffect(() => {
     const start = (curPage - 1) * postsPerPage;
@@ -17,33 +18,57 @@ export default function PostList() {
 
     getAllPosts().then((res) => setPosts(res.slice(start, end)));
     setCurPage(curPage + 1);
-    setObserver();
+    // setObserver();
     // getAllPosts().then((res) => setPosts(res));
   }, []);
 
-  const setObserver = () => {
-    const options = {
-      root: null,
-      rootMargin: "0px",
-      threshold: 1.0,
-    };
-
-    const observer = new IntersectionObserver((entries, observer) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
+  useEffect(() => {
+    const target = loaderRef.current;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
           observer.unobserve(entry.target);
           if (curPage <= Math.ceil(posts.lenght / postsPerPage)) {
             setPosts();
           }
         }
-      });
-    }, options);
+      },
+      { threshold: 1 }
+    );
 
-    const lastPost = document.querySelector(".post:last-child");
-    if (lastPost) {
-      observer.observe(lastPost);
+    if (target) {
+      observer.observe(target);
     }
-  };
+
+    return () => {
+      if (target) {
+        observer.unobserve(target);
+      }
+    };
+  }, [posts, curPage]);
+  // const setObserver = () => {
+  //   const options = {
+  //     root: null,
+  //     rootMargin: "0px",
+  //     threshold: 1.0,
+  //   };
+
+  //   const observer = new IntersectionObserver((entries, observer) => {
+  //     entries.forEach((entry) => {
+  //       if (entry.isIntersecting) {
+  //         observer.unobserve(entry.target);
+  //         if (curPage <= Math.ceil(posts.lenght / postsPerPage)) {
+  //           setPosts();
+  //         }
+  //       }
+  //     });
+  //   }, options);
+
+  //   const lastPost = document.querySelector(".post:last-child");
+  //   if (lastPost) {
+  //     observer.observe(lastPost);
+  //   }
+  // };
 
   const handleDel = async () => {
     setIsDeleting(true);

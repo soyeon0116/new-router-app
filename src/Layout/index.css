@@ -36,4 +36,10 @@ nav p:hover {
   flex-grow: 1;
   overflow: auto;
   height: 92vh;
+  width: 100%;
+}
+.postWrap > div {
+  align-content: center;
+  height: 100%;
+  padding: 0 10px;
 }

@@ -1,0 +1,15 @@
+.editDiv input,
+.editDiv textarea {
+  width: 90%;
+  border: 1px solid gray;
+  border-radius: 5px;
+  display: block;
+}
+.editDiv input {
+  height: 25px;
+  margin: 10px 0;
+}
+.editDiv textarea {
+  height: 300px;
+  margin-bottom: 10px;
+}
