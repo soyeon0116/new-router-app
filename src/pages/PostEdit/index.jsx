@@ -11,6 +11,7 @@ export default function PostEdit() {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
   const navigate = useNavigate();
+  let latestId = localStorage.getItem("latestId") || "";
 
   useEffect(() => {
     getPostById(id).then((res) => setPost(res));
@@ -23,6 +24,7 @@ export default function PostEdit() {
     data.body = body;
     await updatePost(id, data).then((res) => setPost(res));
     setShowModal(false);
+    localStorage.setItem("latestId", id);
     navigate(`/posts/${id}`);
   };
 
@@ -31,7 +33,7 @@ export default function PostEdit() {
   return (
     <div className="editDiv">
       <h2>Edit Post ID : {id}</h2>
-      <p>마지막 수정한 id 값??</p>
+      <p>마지막 수정한 ID : {latestId}</p>
       <form onSubmit={handleSubmit}>
         <input
           type="text"

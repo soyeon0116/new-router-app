@@ -1,5 +1,7 @@
 .detailWrap h2 {
   font-weight: bold;
+  position: relative;
+  padding-left: 25px;
 }
 .detailWrap h3 {
   font-size: 1.2rem;
@@ -8,4 +10,11 @@
 .detailWrap p {
   width: 50%;
   margin-bottom: 10px;
+}
+.detailWrap h2 span {
+  position: absolute;
+  left: 0;
+}
+.detailWrap h2 span svg {
+  color: #ffd600;
 }
