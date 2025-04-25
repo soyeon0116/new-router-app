@@ -14,7 +14,19 @@
 .detailWrap h2 span {
   position: absolute;
   left: 0;
+  cursor: pointer;
 }
 .detailWrap h2 span svg {
   color: #ffd600;
+}
+.favUl {
+  height: 300px;
+  width: 300px;
+  overflow-y: auto;
+}
+.favUl li {
+  background-color: #fff;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }

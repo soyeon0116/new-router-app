@@ -3,7 +3,6 @@ import { delPost, getAllPosts } from "../../apis/post";
 import "./index.css";
 import { Link } from "react-router-dom";
 import { createPortal } from "react-dom";
-import { CiStar } from "react-icons/ci";
 
 export default function PostList() {
   const [posts, setPosts] = useState([]);
