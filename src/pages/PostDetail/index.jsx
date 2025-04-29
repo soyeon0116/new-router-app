@@ -4,18 +4,18 @@ import { getPostById } from "../../apis/post";
 import "./index.css";
 import { IoIosStarOutline, IoMdStar } from "react-icons/io";
 import { createPortal } from "react-dom";
-
 const init = () => {
   return JSON.parse(localStorage.getItem("favList")) || [];
 };
 export default function PostDetail() {
   const { id } = useParams();
   const [post, setPost] = useState(null);
-  const [isFav, setIsFav] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [isFav, setIsFav] = useState(false);
   const [localFav, setLocalFav] = useState(init);
 
   useEffect(() => {
+    setShowModal(false);
     getPostById(id).then((res) => setPost(res));
     for (let i = 0; i < localFav.length; i++) {
       if (localFav[i].id == id) {
@@ -23,19 +23,19 @@ export default function PostDetail() {
         return;
       }
     }
-  }, [id]);
+  }, [id, localFav]);
 
-  const handleAddFavList = () => {
-    localStorage.setItem("favList", JSON.stringify([post]));
-    setLocalFav([post]);
-    setIsFav(true);
-  };
-
-  const handleDeleteFavList = () => {
+  const handleDeleteFavList = (targetId) => {
     setIsFav(false);
-    let newList = localFav.filter((v) => v.id !== post.id);
+    let newList = localFav.filter((v) => v.id !== targetId);
     localStorage.setItem("favList", JSON.stringify(newList));
     setLocalFav(newList);
+  };
+
+  const handleAddFavList = (data) => {
+    localStorage.setItem("favList", JSON.stringify([...localFav, data]));
+    setLocalFav([...localFav, data]);
+    setIsFav(true);
   };
 
   if (!post) return <div className="PostDetailContainer">....Loading</div>;
@@ -43,11 +43,11 @@ export default function PostDetail() {
     <div className="detailWrap">
       <h2>
         {isFav ? (
-          <span onClick={handleDeleteFavList}>
+          <span onClick={() => handleDeleteFavList(post.id)}>
             <IoMdStar />
           </span>
         ) : (
-          <span onClick={handleAddFavList}>
+          <span onClick={() => handleAddFavList(post)}>
             <IoIosStarOutline />
           </span>
         )}
@@ -69,9 +69,11 @@ export default function PostDetail() {
                   <li>목록이 없습니다.</li>
                 ) : (
                   localFav.map((list) => (
-                    <li>
-                      {list.id}. {list.title}
-                    </li>
+                    <Link to={`/posts/${list.id}`}>
+                      <li key={list.id}>
+                        {list.id}. {list.title}
+                      </li>
+                    </Link>
                   ))
                 )}
               </ul>

@@ -150,6 +150,10 @@ button {
 button:hover {
   background-color: var(--main-btn-hover-color);
 }
+button:disabled {
+  background-color: #838383;
+  color: #bdbdbd;
+}
 h2 {
   font-size: 1.5rem;
   margin-bottom: 10px;

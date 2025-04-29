@@ -3,23 +3,28 @@ import { delPost, getAllPosts } from "../../apis/post";
 import "./index.css";
 import { Link } from "react-router-dom";
 import { createPortal } from "react-dom";
+import { IoIosStarOutline, IoMdStar } from "react-icons/io";
 
+const init = () => {
+  return JSON.parse(localStorage.getItem("favList")) || [];
+};
 export default function PostList() {
   const [posts, setPosts] = useState([]);
   const [showModal, setShowModal] = useState(null);
   const [isDeleting, setIsDeleting] = useState(false);
+
+  const [isFav, setIsFav] = useState(false);
+  const [localFav, setLocalFav] = useState(init);
 
   const [visiblePosts, setVisiblePosts] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);
 
   const loaderRef = useRef();
-  // const previousLastPostIndex = visiblePosts.length - 10;
 
   useEffect(() => {
     const loadData = async () => {
       setIsLoading(true);
-      // setTimeout(async () => {
       try {
         const res = await getAllPosts();
         setPosts(res);
@@ -30,7 +35,6 @@ export default function PostList() {
       } finally {
         setIsLoading(false);
       }
-      // }, 1000);
     };
     loadData();
   }, []);
@@ -75,16 +79,37 @@ export default function PostList() {
     }
   };
 
+  const handleDeleteFavList = (targetId) => {
+    setIsFav(false);
+    let newList = localFav.filter((v) => v.id !== targetId);
+    localStorage.setItem("favList", JSON.stringify(newList));
+    setLocalFav(newList);
+  };
+
+  const handleAddFavList = (data) => {
+    localStorage.setItem("favList", JSON.stringify([...localFav, data]));
+    setLocalFav([...localFav, data]);
+    setIsFav(true);
+  };
+
   return (
     <div className="postListWrap" id="postList">
       <h2>PostList</h2>
       <ul>
         {visiblePosts.map((v) => (
-          <li className="post">
+          <li className="post" key={v.id}>
             <Link to={`/posts/${v.id}`}>
-              {/* <CiStar /> */}
               {v.id}. {v.title}
             </Link>
+            {isFav ? (
+              <span onClick={() => handleDeleteFavList(v.id)}>
+                <IoMdStar />
+              </span>
+            ) : (
+              <span onClick={() => handleAddFavList(v)}>
+                <IoIosStarOutline />
+              </span>
+            )}
             <button onClick={() => setShowModal(v.id)}>Delete</button>
           </li>
         ))}

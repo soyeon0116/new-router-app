@@ -1,7 +1,7 @@
 .postListWrap {
   padding: 10px;
 }
-ul li {
+.postListWrap ul li {
   padding: 10px;
   background-color: #eee;
   margin-bottom: 10px;
@@ -10,11 +10,17 @@ ul li {
   align-items: center;
   justify-content: space-between;
 }
-ul li :last-of-type {
+.postListWrap ul li :last-of-type {
   margin-bottom: 0;
 }
-ul li a:hover {
+.postListWrap ul li a:hover {
   color: var(--main-btn-color);
+}
+.postListWrap ul li span {
+  margin-left: auto;
+  margin-right: 10px;
+  color: #ffd600;
+  cursor: pointer;
 }
 .modalListDel {
   width: 300px;
