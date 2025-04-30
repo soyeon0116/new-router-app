@@ -13,9 +13,11 @@ export default function PostDetail() {
   const [showModal, setShowModal] = useState(false);
   const [isFav, setIsFav] = useState(false);
   const [localFav, setLocalFav] = useState(init);
+  const [addBtn, setAddBtn] = useState(false);
 
   useEffect(() => {
-    setShowModal(false);
+    if (addBtn) setShowModal(true);
+    else setShowModal(false);
     getPostById(id).then((res) => setPost(res));
     for (let i = 0; i < localFav.length; i++) {
       if (localFav[i].id == id) {
@@ -36,6 +38,7 @@ export default function PostDetail() {
     localStorage.setItem("favList", JSON.stringify([...localFav, data]));
     setLocalFav([...localFav, data]);
     setIsFav(true);
+    event.target.tagName === "BUTTON" ? setAddBtn(true) : setAddBtn(false);
   };
 
   if (!post) return <div className="PostDetailContainer">....Loading</div>;
@@ -77,7 +80,7 @@ export default function PostDetail() {
                   ))
                 )}
               </ul>
-              <button onClick={handleAddFavList} disabled={isFav}>
+              <button onClick={() => handleAddFavList(post)} disabled={isFav}>
                 추가
               </button>
               <button onClick={() => setShowModal(false)}>닫기</button>

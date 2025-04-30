@@ -13,7 +13,6 @@ export default function PostList() {
   const [showModal, setShowModal] = useState(null);
   const [isDeleting, setIsDeleting] = useState(false);
 
-  const [isFav, setIsFav] = useState(false);
   const [localFav, setLocalFav] = useState(init);
 
   const [visiblePosts, setVisiblePosts] = useState([]);
@@ -28,6 +27,11 @@ export default function PostList() {
       try {
         const res = await getAllPosts();
         setPosts(res);
+        res.forEach((r) => {
+          localFav.forEach((l) => {
+            if (r.id === l.id) return (r["fav"] = true);
+          });
+        });
         setVisiblePosts(res.slice(0, 15));
         setHasMore(res.length > 10);
       } catch (err) {
@@ -37,7 +41,7 @@ export default function PostList() {
       }
     };
     loadData();
-  }, []);
+  }, [localFav]);
 
   useEffect(() => {
     const target = loaderRef.current;
@@ -80,7 +84,6 @@ export default function PostList() {
   };
 
   const handleDeleteFavList = (targetId) => {
-    setIsFav(false);
     let newList = localFav.filter((v) => v.id !== targetId);
     localStorage.setItem("favList", JSON.stringify(newList));
     setLocalFav(newList);
@@ -89,7 +92,6 @@ export default function PostList() {
   const handleAddFavList = (data) => {
     localStorage.setItem("favList", JSON.stringify([...localFav, data]));
     setLocalFav([...localFav, data]);
-    setIsFav(true);
   };
 
   return (
@@ -101,7 +103,7 @@ export default function PostList() {
             <Link to={`/posts/${v.id}`}>
               {v.id}. {v.title}
             </Link>
-            {isFav ? (
+            {v.fav === true ? (
               <span onClick={() => handleDeleteFavList(v.id)}>
                 <IoMdStar />
               </span>
